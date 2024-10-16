@@ -30,7 +30,7 @@ const createOrder = async (req, res) => {
     customer_id: req.body.customer_id,
     total_price: req.body.total_price
   };
-  console.log('Order object:', order);
+  
   try {
     const response = await mongodb.getDatabase().db().collection('orders').insertOne(order);
     if (response.acknowledged) {
