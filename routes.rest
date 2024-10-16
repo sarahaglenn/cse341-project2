@@ -1,0 +1,127 @@
+### local host links:
+### GET all users
+http://localhost:8080/users
+### GET user by id
+http://localhost:8080/users/670523cfa62cf41888b00029
+### POST user
+http://localhost:8080/users HTTP/1.1
+content-type: application/json
+
+{
+    "firstName":"Sarah",
+    "lastName":"Glenn",
+    "email":"sglenn@gmail.com",
+    "address":"8976 Marshall Rd. Evanston, WY",
+    "phone":"(402) 896-5644"
+}
+### PUT user
+http://localhost:8080/users/670523cfa62cf41888b00029 HTTP/1.1
+content-type: application/json
+
+{
+    "phone":"(402) 555-5555"
+}
+### DELETE user
+http://localhost:8080/users/670f7dc6af0c05d93dacf662
+
+
+
+
+
+
+
+
+
+
+### RENDER LINKS
+### GET all users
+https://cse341-project2-5caz.onrender.com/users
+### GET user by id
+https://cse341-project2-5caz.onrender.com/users/670523cfa62cf41888b00029
+### POST user
+https://cse341-project2-5caz.onrender.com/users HTTPS/1.1
+content-type: application/json
+
+{
+    "firstName":"Sarah",
+    "lastName":"Glenn",
+    "email":"sglenn@gmail.com",
+    "address":"8976 Marshall Rd. Evanston, WY",
+    "phone":"(402) 896-5644"
+}
+### PUT user
+https://cse341-project2-5caz.onrender.com/users/670523cfa62cf41888b00029 HTTPS/1.1
+content-type: application/json
+
+{
+    "phone":"(402) 555-5555"
+}
+### DELETE user
+https://cse341-project2-5caz.onrender.com/users/670f7dc6af0c05d93dacf662
+
+### GET all products
+https://cse341-project2-5caz.onrender.com/products
+### GET product by id
+https://cse341-project2-5caz.onrender.com/products/670523b0a62cf41888afcc2b
+### POST product
+https://cse341-project2-5caz.onrender.com/products HTTPS/1.1
+content-type: application/json
+
+{
+    "category": "shoes",
+        "name": "Women's New Balance 680 V8",
+        "description": "Comfortable running shoe with a breathable upper that ensures good ventilation and breathability. Provides good support and comfortable cushioning. Weight: 238 g. Drop: 10 mm.",
+        "brand": "New Balance",
+        "sizes": [
+            "5",
+            "5.5",
+            "6",
+            "6.5",
+            "7",
+            "7.5",
+            "8",
+            "8.5",
+            "9",
+            "9.5",
+            "10",
+            "10.5",
+            "11"
+          ],
+        "price": "$120",
+        "discount": null,
+        "colors": ["black", "white", "neon pink"]
+}
+### PUT product
+https://cse341-project2-5caz.onrender.com/products/670523b0a62cf41888afcc2b HTTPS/1.1
+content-type: application/json
+
+{
+    "price":"$150"
+}
+### DELETE product
+https://cse341-project2-5caz.onrender.com/products/
+
+
+### GET all orders
+https://cse341-project2-5caz.onrender.com/orders
+### GET order by id
+https://cse341-project2-5caz.onrender.com/orders/670f61e83c6c310e426042ae
+### POST order
+https://cse341-project2-5caz.onrender.com/orders HTTPS/1.1
+content-type: application/json
+
+{
+    "items":["670523b0a62cf41888afcc27"],
+    "customer_id":"670523cfa62cf41888b0002f",
+    "total_price":"$135"
+}
+### PUT order
+https://cse341-project2-5caz.onrender.com/orders/670523cfa62cf41888b00029 HTTPS/1.1
+content-type: application/json
+
+{
+    "items":["670523b0a62cf41888afcc27","670523b0a62cf41888afcc2d","670523b0a62cf41888afcc2f", "670523b0a62cf41888afcc2b"],
+    "total_price":"$415"
+}
+### DELETE order
+https://cse341-project2-5caz.onrender.com/orders/670f61e83c6c310e426042b1

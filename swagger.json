@@ -43,7 +43,16 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "description": "The unique identifier for the newly created user."
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -152,7 +161,16 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "productId": {
+                  "type": "string",
+                  "description": "The unique identifier for the newly created product."
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -261,7 +279,16 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderId": {
+                  "type": "string",
+                  "description": "The unique identifier for the newly created order."
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -396,7 +423,9 @@
             "11"
           ]
         },
-        "price": { "type": "string", "example": "$120" }
+        "price": { "type": "string", "example": "$120" },
+        "discount": {"type": "string", "example": "$20"},
+        "colors": {"type": "array", "example": ["pink", "yellow", "navy", "white"]}
       }
     },
     "Order": {
