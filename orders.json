@@ -1,0 +1,22 @@
+[
+  {
+    "items": ["670523b0a62cf41888afcc28", "670523b0a62cf41888afcc2c"],
+    "customer_id": "670523cfa62cf41888b00029",
+    "total_price": "$189"
+  },
+  {
+    "items": ["670523b0a62cf41888afcc2d", "670523b0a62cf41888afcc2f"],
+    "customer_id": "670523cfa62cf41888b0002a",
+    "total_price": "$111"
+  },
+  {
+    "items": ["670523b0a62cf41888afcc2e"],
+    "customer_id": "670523cfa62cf41888b0002c",
+    "total_price": "$65"
+  },
+  {
+    "items": ["670523b0a62cf41888afcc27", "670523b0a62cf41888afcc2d", "670523b0a62cf41888afcc2f"],
+    "customer_id": "670523cfa62cf41888b0002f",
+    "total_price": "$245"
+  }
+]

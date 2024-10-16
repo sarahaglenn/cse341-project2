@@ -1,0 +1,79 @@
+[
+  {
+    "firstName": "Susan",
+    "lastName": "Higgins",
+    "email": "susanh@gmail.com",
+    "address": "123 Main St. Springfield, CA",
+    "phone": "(925) 442-6718"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@gmail.com",
+    "address": "456 Oak St. Dayton, OH",
+    "phone": "(937) 234-5678"
+  },
+  {
+    "firstName": "Emily",
+    "lastName": "Johnson",
+    "email": "emilyj@example.com",
+    "address": "789 Pine St. Denver, CO",
+    "phone": "(303) 555-1234"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Williams",
+    "email": "mwilliams@domain.com",
+    "address": "321 Cedar Ave. Austin, TX",
+    "phone": "(512) 999-8765"
+  },
+  {
+    "firstName": "Olivia",
+    "lastName": "Brown",
+    "email": "oliviab@hotmail.com",
+    "address": "111 Birch Rd. Seattle, WA",
+    "phone": "(206) 123-4567"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Miller",
+    "email": "jamesm@gmail.com",
+    "address": "654 Elm St. Phoenix, AZ",
+    "phone": "(602) 888-6543"
+  },
+  {
+    "firstName": "Sophia",
+    "lastName": "Davis",
+    "email": "sophia.davis@outlook.com",
+    "address": "987 Maple St. Boston, MA",
+    "phone": "(617) 555-7890"
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Garcia",
+    "email": "danielg@yahoo.com",
+    "address": "222 Spruce St. Miami, FL",
+    "phone": "(305) 777-1234"
+  },
+  {
+    "firstName": "Ava",
+    "lastName": "Martinez",
+    "email": "ava.martinez@gmail.com",
+    "address": "555 Walnut St. San Francisco, CA",
+    "phone": "(415) 123-9876"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Taylor",
+    "email": "david.taylor@domain.com",
+    "address": "888 Willow St. Columbus, OH",
+    "phone": "(614) 555-6543"
+  },
+  {
+    "firstName": "Isabella",
+    "lastName": "Anderson",
+    "email": "isabella.a@example.com",
+    "address": "101 Ash St. Chicago, IL",
+    "phone": "(312) 123-6789"
+  }
+]
