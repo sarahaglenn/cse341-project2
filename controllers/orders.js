@@ -12,7 +12,7 @@ const getOrders = async (req, res) => {
 const findOrder = async (req, res) => {
   const orderId = new ObjectId(req.params.id);
   try {
-    const result = await mongodb.getDatabase().db().collection('orders').finOne({ _id: orderId });
+    const result = await mongodb.getDatabase().db().collection('orders').findOne({ _id: orderId });
     if (result) {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(result);

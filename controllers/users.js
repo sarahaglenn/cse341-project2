@@ -12,7 +12,7 @@ const getUsers = async (req, res) => {
 const findUser = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   try {
-    const result = await mongodb.getDatabase().db().collection('users').finOne({ _id: userId });
+    const result = await mongodb.getDatabase().db().collection('users').findOne({ _id: userId });
     if (result) {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(result);

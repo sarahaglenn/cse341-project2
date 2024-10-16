@@ -16,7 +16,7 @@ const findProduct = async (req, res) => {
       .getDatabase()
       .db()
       .collection('products')
-      .finOne({ _id: productId });
+      .findOne({ _id: productId });
     if (result) {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(result);
