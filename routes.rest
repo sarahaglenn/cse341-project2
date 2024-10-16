@@ -69,7 +69,7 @@ DELETE http://localhost:8080/products/670f86e164a74bb280c40ab0
 ### GET all orders
 http://localhost:8080/orders
 ### GET order by id
-http://localhost:8080/orders/670f61e83c6c310e426042ae
+http://localhost:8080/orders/670fb0c742af28db515fbcec
 ### POST order
 POST http://localhost:8080/orders HTTP/1.1
 content-type: application/json
@@ -80,7 +80,7 @@ content-type: application/json
     "total_price":"$135"
 }
 ### PUT order
-PUT http://localhost:8080/orders/670f870e64a74bb280c40ab1 HTTP/1.1
+PUT http://localhost:8080/orders/670fb0c742af28db515fbcec HTTP/1.1
 content-type: application/json
 
 {
@@ -127,7 +127,7 @@ DELETE https://cse341-project2-5caz.onrender.com/users/670f8b40e788373cf7ddebb7
 ### GET all products
 https://cse341-project2-5caz.onrender.com/products
 ### GET product by id
-https://cse341-project2-5caz.onrender.com/products/670fac6c443cfde8f4e09509
+https://cse341-project2-5caz.onrender.com/products/670faf7befe45e946b465a23
 ### POST product
 POST https://cse341-project2-5caz.onrender.com/products HTTP/1.1
 content-type: application/json
@@ -157,20 +157,20 @@ content-type: application/json
         "colors": ["black", "white", "neon pink"]
 }
 ### PUT product
-PUT https://cse341-project2-5caz.onrender.com/products/670f9038c6498ebcb3261f8a HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/products/670faf7befe45e946b465a23 HTTP/1.1
 content-type: application/json
 
 {
     "price":"$150"
 }
 ### DELETE product
-DELETE https://cse341-project2-5caz.onrender.com/products/670f86e164a74bb280c40ab0
+DELETE https://cse341-project2-5caz.onrender.com/products/670faf7befe45e946b465a23
 
 
 ### GET all orders
 https://cse341-project2-5caz.onrender.com/orders
 ### GET order by id
-https://cse341-project2-5caz.onrender.com/orders/670f61e83c6c310e426042ae
+https://cse341-project2-5caz.onrender.com/orders/670fb007efe45e946b465a25
 ### POST order
 POST https://cse341-project2-5caz.onrender.com/orders HTTP/1.1
 content-type: application/json
