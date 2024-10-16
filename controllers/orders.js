@@ -26,7 +26,6 @@ const findOrder = async (req, res) => {
 
 const createOrder = async (req, res) => {
   const order = {
-    orderId: req.body.orderId,
     items: req.body.items,
     customer: req.body.userId,
     total: req.body.total

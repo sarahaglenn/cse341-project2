@@ -26,7 +26,7 @@ DELETE http://localhost:8080/users/670f7dc6af0c05d93dacf662
 ### GET all products
 http://localhost:8080/products
 ### GET product by id
-http://localhost:8080/products/670523b0a62cf41888afcc2b
+http://localhost:8080/products/670fac9c6892b6c2e4d3eb34
 ### POST product
 POST http://localhost:8080/products HTTP/1.1
 content-type: application/json
@@ -56,11 +56,11 @@ content-type: application/json
         "colors": ["black", "white", "neon pink"]
 }
 ### PUT product
-PUT http://localhost:8080/products/670f86e164a74bb280c40ab0 HTTP/1.1
+PUT http://localhost:8080/products/670523b0a62cf41888afcc2b HTTP/1.1
 content-type: application/json
 
 {
-    "price":"$150"
+    "price":"$140"
 }
 ### DELETE product
 DELETE http://localhost:8080/products/670f86e164a74bb280c40ab0
@@ -115,19 +115,19 @@ content-type: application/json
     "phone":"(402) 896-5644"
 }
 ### PUT user
-PUT https://cse341-project2-5caz.onrender.com/users/670f86a264a74bb280c40aaf HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/users/670f8b08e788373cf7ddebb6 HTTP/1.1
 content-type: application/json
 
 {
     "phone":"(402) 555-5555"
 }
 ### DELETE user
-DELETE https://cse341-project2-5caz.onrender.com/users/670f86a264a74bb280c40aaf
+DELETE https://cse341-project2-5caz.onrender.com/users/670f8b40e788373cf7ddebb7
 
 ### GET all products
 https://cse341-project2-5caz.onrender.com/products
 ### GET product by id
-https://cse341-project2-5caz.onrender.com/products/670523b0a62cf41888afcc2b
+https://cse341-project2-5caz.onrender.com/products/670fac6c443cfde8f4e09509
 ### POST product
 POST https://cse341-project2-5caz.onrender.com/products HTTP/1.1
 content-type: application/json
@@ -157,7 +157,7 @@ content-type: application/json
         "colors": ["black", "white", "neon pink"]
 }
 ### PUT product
-PUT https://cse341-project2-5caz.onrender.com/products/670f86e164a74bb280c40ab0 HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/products/670f9038c6498ebcb3261f8a HTTP/1.1
 content-type: application/json
 
 {

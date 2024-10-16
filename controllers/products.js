@@ -30,11 +30,14 @@ const findProduct = async (req, res) => {
 
 const createProduct = async (req, res) => {
   const product = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    address: req.body.address,
-    phone: req.body.phone
+    category: req.body.category,
+    name: req.body.name,
+    description: req.body.description,
+    brand: req.body.brand,
+    sizes: req.body.sizes,
+    price: req.body.price,
+    discount: req.body.discount,
+    colors: req.body.colors
   };
   try {
     const response = await mongodb.getDatabase().db().collection('products').insertOne(product);
