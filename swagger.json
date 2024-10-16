@@ -7,7 +7,7 @@
   },
   "host": "cse341-project2-5caz.onrender.com",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {
@@ -424,8 +424,8 @@
           ]
         },
         "price": { "type": "string", "example": "$120" },
-        "discount": {"type": "string", "example": "$20"},
-        "colors": {"type": "array", "example": ["pink", "yellow", "navy", "white"]}
+        "discount": { "type": "string", "example": "$20" },
+        "colors": { "type": "array", "example": ["pink", "yellow", "navy", "white"] }
       }
     },
     "Order": {
