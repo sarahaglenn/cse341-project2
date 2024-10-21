@@ -2,14 +2,19 @@ const mongodb = require('../database/connect');
 const { ObjectId } = require('mongodb');
 
 const getProducts = async (req, res) => {
-  const result = await mongodb.getDatabase().db().collection('products').find();
-  result.toArray().then((lists) => {
+  try {
+    const result = await mongodb.getDatabase().db().collection('products').find().toArray();
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: 'Error retrieving products', detail: error.message });
+  }
 };
 
 const findProduct = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid product id to find a product.' });
+  }
   const productId = new ObjectId(req.params.id);
   try {
     const result = await mongodb
@@ -55,6 +60,9 @@ const createProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid product id to update a product.' });
+  }
   const productId = new ObjectId(req.params.id);
 
   let updates = {};
@@ -65,6 +73,10 @@ const updateProduct = async (req, res) => {
   if (req.body.price) updates.price = req.body.price;
   if (req.body.size) updates.size = req.body.size;
   if (req.body.discount) updates.discount = req.body.discount;
+
+  if (Object.keys(updates).length === 0) {
+    return res.status(400).json({ error: 'No fields to update.' });
+  }
 
   try {
     const response = await mongodb
@@ -83,6 +95,9 @@ const updateProduct = async (req, res) => {
 };
 
 const deleteProduct = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid product id to delete a product.' });
+  }
   const productId = new ObjectId(req.params.id);
   try {
     const response = await mongodb

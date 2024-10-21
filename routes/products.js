@@ -1,14 +1,15 @@
 const router = require('express').Router();
 
 const productsController = require('../controllers/products');
+const validation = require('../middleware/validate.js');
 
 router.get('/', productsController.getProducts);
 
 router.get('/:id', productsController.findProduct);
 
-router.post('/', productsController.createProduct);
+router.post('/', validation.saveProduct, productsController.createProduct);
 
-router.put('/:id', productsController.updateProduct);
+router.put('/:id', validation.updateProduct, productsController.updateProduct);
 
 router.delete('/:id', productsController.deleteProduct);
 

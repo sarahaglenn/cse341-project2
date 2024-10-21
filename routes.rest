@@ -8,14 +8,14 @@ POST http://localhost:8080/users HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Sarah",
+    "firstName":"Sally",
     "lastName":"Glenn",
-    "email":"sglenn@gmail.com",
-    "address":"8976 Marshall Rd. Evanston, WY",
-    "phone":"(402) 896-5644"
+    "email":"sally@gmail.com",
+    "address":"76 Hopkins Dr. Chicago, IL",
+    "phone":"(123) 456-7890"
 }
 ### PUT user
-PUT http://localhost:8080/users/670523cfa62cf41888b00029 HTTP/1.1
+PUT http://localhost:8080/users/6716be7fe544d0a2246503a7 HTTP/1.1
 content-type: application/json
 
 {
@@ -26,7 +26,7 @@ DELETE http://localhost:8080/users/670f7dc6af0c05d93dacf662
 ### GET all products
 http://localhost:8080/products
 ### GET product by id
-http://localhost:8080/products/670fac9c6892b6c2e4d3eb34
+http://localhost:8080/products/6716bfa0e544d0a2246503a8
 ### POST product
 POST http://localhost:8080/products HTTP/1.1
 content-type: application/json
@@ -51,16 +51,15 @@ content-type: application/json
             "10.5",
             "11"
           ],
-        "price": "$120",
-        "discount": null,
+        "price": 120,
         "colors": ["black", "white", "neon pink"]
 }
 ### PUT product
-PUT http://localhost:8080/products/670523b0a62cf41888afcc2b HTTP/1.1
+PUT http://localhost:8080/products/6716bfa0e544d0a2246503a8 HTTP/1.1
 content-type: application/json
 
 {
-    "price":"$140"
+    "price":140
 }
 ### DELETE product
 DELETE http://localhost:8080/products/670f86e164a74bb280c40ab0
@@ -69,7 +68,7 @@ DELETE http://localhost:8080/products/670f86e164a74bb280c40ab0
 ### GET all orders
 http://localhost:8080/orders
 ### GET order by id
-http://localhost:8080/orders/670fb0c742af28db515fbcec
+http://localhost:8080/orders/6716c10ba9a2a8fb751583df
 ### POST order
 POST http://localhost:8080/orders HTTP/1.1
 content-type: application/json
@@ -77,15 +76,15 @@ content-type: application/json
 {
     "items":["670523b0a62cf41888afcc27"],
     "customer_id":"670523cfa62cf41888b0002f",
-    "total_price":"$135"
+    "total_price":135
 }
 ### PUT order
-PUT http://localhost:8080/orders/670fb0c742af28db515fbcec HTTP/1.1
+PUT http://localhost:8080/orders/6716c10ba9a2a8fb751583df HTTP/1.1
 content-type: application/json
 
 {
     "items":["670523b0a62cf41888afcc27","670523b0a62cf41888afcc2d","670523b0a62cf41888afcc2f", "670523b0a62cf41888afcc2b"],
-    "total_price":"$415"
+    "total_price":250
 }
 ### DELETE order
 DELETE http://localhost:8080/orders/670f870e64a74bb280c40ab1
@@ -115,19 +114,19 @@ content-type: application/json
     "phone":"(402) 896-5644"
 }
 ### PUT user
-PUT https://cse341-project2-5caz.onrender.com/users/670f8b08e788373cf7ddebb6 HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/users/670fb43fa6fc3f53198b0e0f HTTP/1.1
 content-type: application/json
 
 {
     "phone":"(402) 555-5555"
 }
 ### DELETE user
-DELETE https://cse341-project2-5caz.onrender.com/users/670f8b40e788373cf7ddebb7
+DELETE https://cse341-project2-5caz.onrender.com/users/670fb43fa6fc3f53198b0e0f
 
 ### GET all products
 https://cse341-project2-5caz.onrender.com/products
 ### GET product by id
-https://cse341-project2-5caz.onrender.com/products/670faf7befe45e946b465a23
+https://cse341-project2-5caz.onrender.com/products/670fb491a6fc3f53198b0e10
 ### POST product
 POST https://cse341-project2-5caz.onrender.com/products HTTP/1.1
 content-type: application/json
@@ -152,25 +151,25 @@ content-type: application/json
             "10.5",
             "11"
           ],
-        "price": "$120",
+        "price": 120,
         "discount": null,
         "colors": ["black", "white", "neon pink"]
 }
 ### PUT product
-PUT https://cse341-project2-5caz.onrender.com/products/670faf7befe45e946b465a23 HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/products/670fb491a6fc3f53198b0e10 HTTP/1.1
 content-type: application/json
 
 {
-    "price":"$150"
+    "price":150
 }
 ### DELETE product
-DELETE https://cse341-project2-5caz.onrender.com/products/670faf7befe45e946b465a23
+DELETE https://cse341-project2-5caz.onrender.com/products/670fb491a6fc3f53198b0e10
 
 
 ### GET all orders
 https://cse341-project2-5caz.onrender.com/orders
 ### GET order by id
-https://cse341-project2-5caz.onrender.com/orders/670fb007efe45e946b465a25
+https://cse341-project2-5caz.onrender.com/orders/670f61e83c6c310e426042ae
 ### POST order
 POST https://cse341-project2-5caz.onrender.com/orders HTTP/1.1
 content-type: application/json
@@ -178,15 +177,15 @@ content-type: application/json
 {
     "items":["670523b0a62cf41888afcc27"],
     "customer_id":"670523cfa62cf41888b0002f",
-    "total_price":"$135"
+    "total_price":135
 }
 ### PUT order
-PUT https://cse341-project2-5caz.onrender.com/orders/670f870e64a74bb280c40ab1 HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/orders/670fb4b4a6fc3f53198b0e11 HTTP/1.1
 content-type: application/json
 
 {
     "items":["670523b0a62cf41888afcc27","670523b0a62cf41888afcc2d","670523b0a62cf41888afcc2f", "670523b0a62cf41888afcc2b"],
-    "total_price":"$415"
+    "total_price":415
 }
 ### DELETE order
-DELETE https://cse341-project2-5caz.onrender.com/orders/670f870e64a74bb280c40ab1
+DELETE https://cse341-project2-5caz.onrender.com/orders/670fb4b4a6fc3f53198b0e11

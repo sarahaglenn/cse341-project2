@@ -21,7 +21,7 @@
       "11.5",
       "12"
     ],
-    "price": "$135",
+    "price": 135,
     "discount": null,
     "colors": [
       "black/white",
@@ -61,7 +61,7 @@
       "15.5",
       "16"
     ],
-    "price": "$135",
+    "price": 135,
     "discount": null,
     "colors": [
       "black/white",
@@ -97,7 +97,7 @@
       "12.5",
       "13"
     ],
-    "price": "$200",
+    "price": 200,
     "discount": null,
     "colors": ["cool gray/safety yellow", "white/cool gray", "black/white", "bold magenta/pink glo"]
   },
@@ -123,7 +123,7 @@
       "11.5",
       "12"
     ],
-    "price": "$170",
+    "price": 170,
     "discount": null,
     "colors": ["black/pink", "white/violet", "black", "moon/plum", "white/viziblue"]
   },
@@ -149,7 +149,7 @@
       "11.5",
       "12"
     ],
-    "price": "$170",
+    "price": 170,
     "discount": null,
     "colors": ["white/viziorange", "black", "navy/spice", "white/viziblue"]
   },
@@ -159,7 +159,7 @@
     "description": "This men’s short sleeve shirt is the most comfortable, softest workout shirt on the planet. It uses Vuori’s buttery smooth performance knit that wicks away moisture, has anti-odor properties and UPF 30+ rating for next level comfort.",
     "brand": "Vuori",
     "sizes": ["xs", "s", "m", "l", "xl", "2xl"],
-    "price": "$54",
+    "price": 54,
     "discount": null,
     "colors": [
       "elderberry heather",
@@ -175,8 +175,8 @@
     "description": "So easy to love it may be hard to take off, the EZ Tee offers everything you could want in a running shirt. Made with our impossibly soft Quick N’ Fit fabric, the EZ Tee is so comfortable you may forget you’re wearing it. ",
     "brand": "Rabbit",
     "sizes": ["xs", "s", "m", "l", "xl"],
-    "price": "$55",
-    "discount": "$5",
+    "price": 55,
+    "discount": 5,
     "colors": ["withered rose", "grey", "dark forest", "true navy", "black", "oil teal"]
   },
   {
@@ -185,8 +185,8 @@
     "description": "The Brooks Sherpa 5\" 2-in-1 Shorts takes comfort and performance to the next level. Brooks updated its Sherpa short with a new, flat waistband that stays put. It won’t ride up or slide down, and it sits slightly higher on your waist for more coverage.",
     "brand": "Brooks",
     "sizes": ["xs", "s", "m", "l", "xl", "2xl"],
-    "price": "$68",
-    "discount": "$3",
+    "price": 68,
+    "discount": 3,
     "colors": ["black", "blue slate", "heather charcoal", "surge", "navy", "dusk/dawn"]
   },
   {
@@ -195,7 +195,7 @@
     "description": "These mid-length boy shorts give you more coverage and an even better feel with moderate compression. Details such as a mid-rise waist, no liner and 4” inseam will have you sprinting to the finish.",
     "brand": "Rabbit",
     "sizes": ["xs", "s", "m", "l", "xl"],
-    "price": "$60",
+    "price": 60,
     "discount": null,
     "colors": ["black", "dress blues", "vivacious", "solar illusion", "baltic"]
   }

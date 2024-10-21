@@ -2,14 +2,19 @@ const mongodb = require('../database/connect');
 const { ObjectId } = require('mongodb');
 
 const getUsers = async (req, res) => {
-  const result = await mongodb.getDatabase().db().collection('users').find();
-  result.toArray().then((lists) => {
+  try {
+    const result = await mongodb.getDatabase().db().collection('users').find().toArray();
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: 'Error retrieving users', detail: error.message });
+  }
 };
 
 const findUser = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid user id to find a user.' });
+  }
   const userId = new ObjectId(req.params.id);
   try {
     const result = await mongodb.getDatabase().db().collection('users').findOne({ _id: userId });
@@ -46,6 +51,9 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid user id to find a user.' });
+  }
   const userId = new ObjectId(req.params.id);
 
   let updates = {};
@@ -54,6 +62,10 @@ const updateUser = async (req, res) => {
   if (req.body.email) updates.email = req.body.email;
   if (req.body.address) updates.address = req.body.address;
   if (req.body.phone) updates.phone = req.body.phone;
+
+  if (Object.keys(updates).length === 0) {
+    return res.status(400).json({ error: 'No fields to update.' });
+  }
 
   try {
     const response = await mongodb
@@ -72,6 +84,9 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid user id to find a user.' });
+  }
   const userId = new ObjectId(req.params.id);
   try {
     const response = await mongodb

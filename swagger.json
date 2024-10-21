@@ -15,6 +15,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -26,6 +29,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -54,6 +60,12 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -75,6 +87,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request - Must use a valid order id to find an order.",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
           },
           "404": {
             "description": "Not Found"
@@ -105,6 +123,12 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
+          },
           "404": {
             "description": "Not Found"
           },
@@ -127,6 +151,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request - Must use a valid order id to find an order.",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
           },
           "404": {
             "description": "Not Found"
@@ -172,6 +202,12 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -193,6 +229,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request - Must use a valid order id to find an order.",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
           },
           "404": {
             "description": "Not Found"
@@ -223,6 +265,12 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
+          },
           "404": {
             "description": "Not Found"
           },
@@ -245,6 +293,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request - Must use a valid order id to find an order.",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
           },
           "404": {
             "description": "Not Found"
@@ -290,6 +344,12 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -311,6 +371,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request - Must use a valid order id to find an order.",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
           },
           "404": {
             "description": "Not Found"
@@ -341,6 +407,12 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
+          },
           "404": {
             "description": "Not Found"
           },
@@ -363,6 +435,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request - Must use a valid order id to find an order.",
+            "schema": {
+              "$ref": "#/definitions/BadRequest"
+            }
           },
           "404": {
             "description": "Not Found"
@@ -423,8 +501,8 @@
             "11"
           ]
         },
-        "price": { "type": "string", "example": "$120" },
-        "discount": { "type": "string", "example": "$20" },
+        "price": { "type": "numeric", "example": 120 },
+        "discount": { "type": "numeric", "example": 20 },
         "colors": { "type": "array", "example": ["pink", "yellow", "navy", "white"] }
       }
     },
@@ -437,7 +515,23 @@
           "description": "An array of product IDs included in the order"
         },
         "customer_id": { "type": "string", "example": "670523cfa62cf41888b0002a" },
-        "total_price": { "type": "string", "example": "$111" }
+        "total_price": { "type": "numeric", "example": 111 }
+      }
+    },
+    "BadRequest": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "example": "Validation failed."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "name is a required field."
+          }
+        }
       }
     }
   }

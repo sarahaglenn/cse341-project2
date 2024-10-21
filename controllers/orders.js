@@ -2,14 +2,19 @@ const mongodb = require('../database/connect');
 const { ObjectId } = require('mongodb');
 
 const getOrders = async (req, res) => {
-  const result = await mongodb.getDatabase().db().collection('orders').find();
-  result.toArray().then((lists) => {
+  try {
+    const result = await mongodb.getDatabase().db().collection('orders').find().toArray();
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: 'Error retrieving orders', detail: error.message });
+  }
 };
 
 const findOrder = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid order id to find an order.' });
+  }
   const orderId = new ObjectId(req.params.id);
   try {
     const result = await mongodb.getDatabase().db().collection('orders').findOne({ _id: orderId });
@@ -30,7 +35,7 @@ const createOrder = async (req, res) => {
     customer_id: req.body.customer_id,
     total_price: req.body.total_price
   };
-  
+
   try {
     const response = await mongodb.getDatabase().db().collection('orders').insertOne(order);
     if (response.acknowledged) {
@@ -45,12 +50,19 @@ const createOrder = async (req, res) => {
 };
 
 const updateOrder = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid order id to update an order.' });
+  }
   const orderId = new ObjectId(req.params.id);
 
   let updates = {};
   if (req.body.items) updates.items = req.body.items;
-  if (req.body.customer) updates.customer = req.body.customer;
-  if (req.body.total) updates.total = req.body.total;
+  if (req.body.customer_id) updates.customer_id = req.body.customer_id;
+  if (req.body.total_price) updates.total_price = req.body.total_price;
+
+  if (Object.keys(updates).length === 0) {
+    return res.status(400).json({ error: 'No fields to update.' });
+  }
 
   try {
     const response = await mongodb
@@ -69,6 +81,9 @@ const updateOrder = async (req, res) => {
 };
 
 const deleteOrder = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: 'Must use a valid order id to delete an order.' });
+  }
   const orderId = new ObjectId(req.params.id);
   try {
     const response = await mongodb
