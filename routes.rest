@@ -108,25 +108,24 @@ content-type: application/json
 
 {
     "firstName":"Sarah",
-    "lastName":"Glenn",
     "email":"sglenn@gmail.com",
     "address":"8976 Marshall Rd. Evanston, WY",
     "phone":"(402) 896-5644"
 }
 ### PUT user
-PUT https://cse341-project2-5caz.onrender.com/users/670fb43fa6fc3f53198b0e0f HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/users/670523cfa62cf41888b00029 HTTP/1.1
 content-type: application/json
 
 {
-    "phone":"(402) 555-5555"
+    "phone":"(111) 555-0000"
 }
 ### DELETE user
-DELETE https://cse341-project2-5caz.onrender.com/users/670fb43fa6fc3f53198b0e0f
+DELETE https://cse341-project2-5caz.onrender.com/users/6716be7fe544d0a2246503a7
 
 ### GET all products
 https://cse341-project2-5caz.onrender.com/products
 ### GET product by id
-https://cse341-project2-5caz.onrender.com/products/670fb491a6fc3f53198b0e10
+https://cse341-project2-5caz.onrender.com/products/671a96023fd706d048bd825e
 ### POST product
 POST https://cse341-project2-5caz.onrender.com/products HTTP/1.1
 content-type: application/json
@@ -156,7 +155,7 @@ content-type: application/json
         "colors": ["black", "white", "neon pink"]
 }
 ### PUT product
-PUT https://cse341-project2-5caz.onrender.com/products/670fb491a6fc3f53198b0e10 HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/products/671a96023fd706d048bd825e HTTP/1.1
 content-type: application/json
 
 {
