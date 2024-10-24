@@ -40,7 +40,7 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "body",
+            "name": "user",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/User"
@@ -89,7 +89,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid order id to find an order.",
+            "description": "Bad Request - Must use a valid user id to find a user.",
             "schema": {
               "$ref": "#/definitions/BadRequest"
             }
@@ -112,7 +112,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "user updates",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/User"
@@ -121,7 +121,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content - The resource was successfully updated, but no response body is returned."
           },
           "400": {
             "description": "Bad Request",
@@ -138,7 +138,7 @@
         }
       },
       "delete": {
-        "description": "Delete a contact by their id.",
+        "description": "Delete a user by their id.",
         "produces": ["application/json"],
         "parameters": [
           {
@@ -153,7 +153,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid order id to find an order.",
+            "description": "Bad Request - Must use a valid user id to delete a user.",
             "schema": {
               "$ref": "#/definitions/BadRequest"
             }
@@ -182,7 +182,7 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "body",
+            "name": "product",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/Product"
@@ -231,7 +231,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid order id to find an order.",
+            "description": "Bad Request - Must use a valid product id to find a product.",
             "schema": {
               "$ref": "#/definitions/BadRequest"
             }
@@ -254,7 +254,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "product updates",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/Product"
@@ -263,7 +263,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content - The resource was successfully updated, but no response body is returned."
           },
           "400": {
             "description": "Bad Request",
@@ -295,7 +295,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid order id to find an order.",
+            "description": "Bad Request - Must use a valid product id to delete a product.",
             "schema": {
               "$ref": "#/definitions/BadRequest"
             }
@@ -324,7 +324,7 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "body",
+            "name": "order",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/Order"
@@ -396,7 +396,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "order updates",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/Order"
@@ -405,7 +405,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content - The resource was successfully updated, but no response body is returned."
           },
           "400": {
             "description": "Bad Request",
@@ -437,7 +437,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid order id to find an order.",
+            "description": "Bad Request - Must use a valid order id to delete an order.",
             "schema": {
               "$ref": "#/definitions/BadRequest"
             }
@@ -450,21 +450,12 @@
           }
         }
       }
-    },
-    "/api-docs/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
     }
   },
   "definitions": {
     "User": {
       "type": "object",
+      "required": ["firstName", "lastName", "email", "address"],
       "properties": {
         "firstName": { "type": "string", "example": "Sarah" },
         "lastName": { "type": "string", "example": "Glenn" },
@@ -475,6 +466,7 @@
     },
     "Product": {
       "type": "object",
+      "required": ["category", "name", "description", "brand", "sizes", "price", "colors"],
       "properties": {
         "category": { "type": "string", "example": "shoes" },
         "name": { "type": "string", "example": "Women's New Balance 680 V8" },
@@ -501,13 +493,14 @@
             "11"
           ]
         },
-        "price": { "type": "numeric", "example": 120 },
-        "discount": { "type": "numeric", "example": 20 },
+        "price": { "type": "number", "example": 120 },
+        "discount": { "type": "number", "example": 20 },
         "colors": { "type": "array", "example": ["pink", "yellow", "navy", "white"] }
       }
     },
     "Order": {
       "type": "object",
+      "required": ["items", "customer_id", "total_price"],
       "properties": {
         "items": {
           "type": "array",
@@ -515,7 +508,7 @@
           "description": "An array of product IDs included in the order"
         },
         "customer_id": { "type": "string", "example": "670523cfa62cf41888b0002a" },
-        "total_price": { "type": "numeric", "example": 111 }
+        "total_price": { "type": "number", "example": 111 }
       }
     },
     "BadRequest": {
