@@ -477,6 +477,9 @@
         "brand": { "type": "string", "example": "New Balance" },
         "sizes": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": [
             "5",
             "5.5",
@@ -495,7 +498,11 @@
         },
         "price": { "type": "number", "example": 120 },
         "discount": { "type": "number", "example": 20 },
-        "colors": { "type": "array", "example": ["pink", "yellow", "navy", "white"] }
+        "colors": { "type": "array", 
+        "items": {
+          "type": "string"
+        },
+        "example": ["pink", "yellow", "navy", "white"] }
       }
     },
     "Order": {
@@ -504,6 +511,9 @@
       "properties": {
         "items": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": ["670523b0a62cf41888afcc2d", "670523b0a62cf41888afcc2f"],
           "description": "An array of product IDs included in the order"
         },
