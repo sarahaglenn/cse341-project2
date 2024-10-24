@@ -108,6 +108,7 @@ content-type: application/json
 
 {
     "firstName":"Sarah",
+    "lastName":"Glenn",
     "email":"sglenn@gmail.com",
     "address":"8976 Marshall Rd. Evanston, WY",
     "phone":"(402) 896-5644"
@@ -117,10 +118,10 @@ PUT https://cse341-project2-5caz.onrender.com/users/670523cfa62cf41888b00029 HTT
 content-type: application/json
 
 {
-    "phone":"(111) 555-0000"
+    "phone":"(801) 321-7447"
 }
 ### DELETE user
-DELETE https://cse341-project2-5caz.onrender.com/users/6716be7fe544d0a2246503a7
+DELETE https://cse341-project2-5caz.onrender.com/users/670fb415a6fc3f53198b0e0e
 
 ### GET all products
 https://cse341-project2-5caz.onrender.com/products

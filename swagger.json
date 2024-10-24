@@ -60,10 +60,10 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "412": {
+            "description": "Precondition Failed",
             "schema": {
-              "$ref": "#/definitions/BadRequest"
+              "$ref": "#/definitions/ValidationFailed"
             }
           },
           "500": {
@@ -89,13 +89,10 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid user id to find a user.",
-            "schema": {
-              "$ref": "#/definitions/BadRequest"
-            }
+            "description": "Bad Request - Must use a valid user id to find a user."
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - No user exists with that id."
           },
           "500": {
             "description": "Internal Server Error"
@@ -124,13 +121,16 @@
             "description": "No Content - The resource was successfully updated, but no response body is returned."
           },
           "400": {
-            "description": "Bad Request",
+            "description": "Bad Request - Must use a valid user id to find a user. or No fields to update"
+          },
+          "412": {
+            "description": "Precondition Failed",
             "schema": {
-              "$ref": "#/definitions/BadRequest"
+              "$ref": "#/definitions/ValidationFailed"
             }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - User not found or nothing was updated."
           },
           "500": {
             "description": "Internal Server Error"
@@ -153,13 +153,10 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid user id to delete a user.",
-            "schema": {
-              "$ref": "#/definitions/BadRequest"
-            }
+            "description": "Bad Request - Must use a valid user id to delete a user."
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - User not found or could not be deleted."
           },
           "500": {
             "description": "Internal Server Error"
@@ -205,10 +202,10 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "412": {
+            "description": "Precondition Failed",
             "schema": {
-              "$ref": "#/definitions/BadRequest"
+              "$ref": "#/definitions/ValidationFailed"
             }
           },
           "500": {
@@ -234,13 +231,10 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid product id to find a product.",
-            "schema": {
-              "$ref": "#/definitions/BadRequest"
-            }
+            "description": "Bad Request - Must use a valid product id to find a product."
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - No product exists with that id."
           },
           "500": {
             "description": "Internal Server Error"
@@ -268,14 +262,17 @@
           "204": {
             "description": "No Content - The resource was successfully updated, but no response body is returned."
           },
-          "400": {
-            "description": "Bad Request",
+          "412": {
+            "description": "Precondition Failed",
             "schema": {
-              "$ref": "#/definitions/BadRequest"
+              "$ref": "#/definitions/ValidationFailed"
             }
           },
+          "400": {
+            "description": "Bad Request - Must use a valid product id to update a product or No fields to update."
+          },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - Product not found or nothing was updated."
           },
           "500": {
             "description": "Internal Server Error"
@@ -298,13 +295,10 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid product id to delete a product.",
-            "schema": {
-              "$ref": "#/definitions/BadRequest"
-            }
+            "description": "Bad Request - Must use a valid product id to delete a product."
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - product not found or could not be deleted."
           },
           "500": {
             "description": "Internal Server Error"
@@ -350,10 +344,10 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "412": {
+            "description": "Precondition Failed",
             "schema": {
-              "$ref": "#/definitions/BadRequest"
+              "$ref": "#/definitions/ValidationFailed"
             }
           },
           "500": {
@@ -379,13 +373,10 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid order id to find an order.",
-            "schema": {
-              "$ref": "#/definitions/BadRequest"
-            }
+            "description": "Bad Request - Must use a valid order id to find an order."
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found - No order exists with that id."
           },
           "500": {
             "description": "Internal Server Error"
@@ -414,13 +405,16 @@
             "description": "No Content - The resource was successfully updated, but no response body is returned."
           },
           "400": {
-            "description": "Bad Request",
+            "description": "Bad Request - Must use a valid order id to update an order. Or No fields to update."
+          },
+          "412": {
+            "description": "Precondition Failed",
             "schema": {
-              "$ref": "#/definitions/BadRequest"
+              "$ref": "#/definitions/ValidationFailed"
             }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found or nothing was updated."
           },
           "500": {
             "description": "Internal Server Error"
@@ -443,10 +437,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request - Must use a valid order id to delete an order.",
-            "schema": {
-              "$ref": "#/definitions/BadRequest"
-            }
+            "description": "Bad Request - Must use a valid order id to delete an order."
           },
           "404": {
             "description": "Order not found or could not be deleted."
@@ -527,7 +518,7 @@
         "total_price": { "type": "number", "example": 111 }
       }
     },
-    "BadRequest": {
+    "ValidationFailed": {
       "type": "object",
       "properties": {
         "error": {
