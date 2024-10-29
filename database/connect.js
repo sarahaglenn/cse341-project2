@@ -1,31 +1,47 @@
 const dotenv = require('dotenv');
-dotenv.config();
 const mongoose = require('mongoose');
+dotenv.config();
 // const MongoClient = require('mongodb').MongoClient;
 
-let _db;
+// let _db;
 
 const initDatabase = (callback) => {
-  if (_db) {
-    console.log('Database has already been initialized.');
-    return callback(null, _db);
-  }
-  mongoose
-    .connect(process.env.MONGODB_URI)
+  mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
     .then(() => {
-      _db = mongoose.connection;
-      callback(null, _db);
+      console.log('Connected to MongoDB');
+      callback(null);
     })
     .catch((err) => {
+      console.error('MongoDB connection error:', err);
       callback(err);
     });
 };
 
+
+//   if (_db) {
+//     console.log('Database has already been initialized.');
+//     return callback(null, _db);
+//   }
+//   mongoose
+//     .connect(process.env.MONGODB_URI)
+//     .then(() => {
+//       _db = mongoose.connection;
+//       callback(null, _db);
+//     })
+//     .catch((err) => {
+//       callback(err);
+//     });
+// };
+
 const getDatabase = () => {
-  if (!_db) {
-    throw Error('Database not initialized.');
-  }
-  return _db;
+  return mongoose.connection;
+  // if (!_db) {
+  //   throw Error('Database not initialized.');
+  // }
+  // return _db;
 };
 module.exports = {
   initDatabase,

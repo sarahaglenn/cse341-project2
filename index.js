@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./database/connect');
+const passport = require("passport");
 const passportSetup = require('./config/passport-setup');
+const session = require("express-session");
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
@@ -9,6 +11,15 @@ const swaggerDocument = require('./swagger.json');
 const app = express();
 
 const port = process.env.PORT || 8080;
+
+app
+  .use(session({
+    secret: process.env.COOKIE_KEY,
+    resave: false,
+    saveUninitialized: false
+  }))
+  .use(passport.initialize())
+  .use(passport.session());
 
 app
   .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))

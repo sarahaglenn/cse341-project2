@@ -1,11 +1,12 @@
-const mongodb = require('../database/connect');
+// const mongodb = require('../database/connect');
+const User = require('../models/user-model');
 const { ObjectId } = require('mongodb');
 
 const getUsers = async (req, res) => {
   try {
-    const result = await mongodb.getDatabase().db().collection('users').find().toArray();
+    const users = await User.find();
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: 'Error retrieving users', detail: error.message });
   }
@@ -15,12 +16,12 @@ const findUser = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid user id to find a user.' });
   }
-  const userId = new ObjectId(req.params.id);
+  const userId = req.params.id;
   try {
-    const result = await mongodb.getDatabase().db().collection('users').findOne({ _id: userId });
-    if (result) {
+    const user = await User.findById(userId);
+    if (user) {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(result);
+      res.status(200).json(user);
     } else {
       res.status(404).json({ error: 'No user exists with that id' });
     }
@@ -30,21 +31,19 @@ const findUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const user = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    address: req.body.address,
-    phone: req.body.phone
-  };
+  const { firstName, lastName, email, address, phone, googleId } = req.body;
+  const user = new User({
+    firstName,
+    lastName,
+    email,
+    address,
+    phone,
+    ...(googleId && { googleId }) // only include googleId if it is provided
+  });
   try {
-    const response = await mongodb.getDatabase().db().collection('users').insertOne(user);
-    if (response.acknowledged) {
+    const savedUser = await user.save();
       res.setHeader('Content-Type', 'application/json');
-      res.status(201).json({ message: 'User successfully added.', userId: response.insertedId });
-    } else {
-      res.status(500).json({ error: 'User could not be added.' });
-    }
+      res.status(201).json({ message: 'User successfully added.', userId: savedUser._id });
   } catch (error) {
     res.status(500).json({ error: 'Error adding user.', details: error.message });
   }
@@ -54,7 +53,7 @@ const updateUser = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid user id to find a user.' });
   }
-  const userId = new ObjectId(req.params.id);
+  const userId = req.params.id;
 
   let updates = {};
   if (req.body.firstName) updates.firstName = req.body.firstName;
@@ -68,12 +67,8 @@ const updateUser = async (req, res) => {
   }
 
   try {
-    const response = await mongodb
-      .getDatabase()
-      .db()
-      .collection('users')
-      .updateOne({ _id: userId }, { $set: updates });
-    if (response.modifiedCount > 0) {
+    const updatedUser = await User.findByIdAndUpdate(userId, updates, { new: true });
+    if (updatedUser) {
       res.status(204).send();
     } else {
       res.status(404).json({ error: 'User not found or nothing was updated.' });
@@ -87,16 +82,12 @@ const deleteUser = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid user id to find a user.' });
   }
-  const userId = new ObjectId(req.params.id);
+  const userId = req.params.id;
   try {
-    const response = await mongodb
-      .getDatabase()
-      .db()
-      .collection('users')
-      .deleteOne({ _id: userId });
-    if (response.deletedCount > 0) {
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if (deletedUser) {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json({ message: 'User deleted', userId: userId });
+      res.status(200).json({ message: 'User deleted', userId });
     } else {
       res.status(404).json({ error: 'User not found or could not be deleted.' });
     }
