@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./database/connect');
-const passportSetup = require("./config/passport-setup");
+const passportSetup = require('./config/passport-setup');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
