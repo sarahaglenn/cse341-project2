@@ -2,9 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 
 // auth login
-router.get('/login', (req, res) => {
-  res.render('login');
-});
+// maybe create a login endpoint?
 
 // auth logout
 router.get('/logout', (req, res, next) => {
