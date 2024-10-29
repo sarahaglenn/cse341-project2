@@ -6,10 +6,7 @@ dotenv.config();
 // let _db;
 
 const initDatabase = (callback) => {
-  mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
       console.log('Connected to MongoDB');
       callback(null);
