@@ -21,6 +21,7 @@
     "express": "^4.21.0",
     "googleapis": "^105.0.0",
     "mongodb": "^6.9.0",
+    "mongoose": "^8.7.3",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "swagger-ui-express": "^5.0.1",
