@@ -13,11 +13,15 @@ passport.deserializeUser((id, done) => {
     })
 });
 
+const callbackURL = process.env.NODE_ENV === 'production'
+  ? process.env.CALLBACK_URL_PROD
+  : process.env.CALLBACK_URL_DEV;
+
 passport.use(
     new GoogleStrategy(
         {
             //options for the google strategy
-            callbackURL: '/auth/google/redirect',
+            callbackURL,
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET
         },
