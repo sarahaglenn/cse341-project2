@@ -156,14 +156,14 @@ content-type: application/json
         "colors": ["black", "white", "neon pink"]
 }
 ### PUT product
-PUT https://cse341-project2-5caz.onrender.com/products/671a96023fd706d048bd825e HTTP/1.1
+PUT https://cse341-project2-5caz.onrender.com/products/671aa4361ac01014da3b063b HTTP/1.1
 content-type: application/json
 
 {
     "price":150
 }
 ### DELETE product
-DELETE https://cse341-project2-5caz.onrender.com/products/670fb491a6fc3f53198b0e10
+DELETE https://cse341-project2-5caz.onrender.com/products/671aa4361ac01014da3b063b
 
 
 ### GET all orders
