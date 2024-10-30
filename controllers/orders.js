@@ -1,11 +1,11 @@
-const mongodb = require('../database/connect');
+const Order = require('../models/order-model');
 const { ObjectId } = require('mongodb');
 
 const getOrders = async (req, res) => {
   try {
-    const result = await mongodb.getDatabase().db().collection('orders').find().toArray();
+    const orders = await Order.find();
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
+    res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ error: 'Error retrieving orders', detail: error.message });
   }
@@ -15,12 +15,12 @@ const findOrder = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid order id to find an order.' });
   }
-  const orderId = new ObjectId(req.params.id);
+  const orderId = req.params.id;
   try {
-    const result = await mongodb.getDatabase().db().collection('orders').findOne({ _id: orderId });
-    if (result) {
+    const order = await Order.findById(orderId);
+    if (order) {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(result);
+      res.status(200).json(order);
     } else {
       res.status(404).json({ error: 'No order exists with that id' });
     }
@@ -30,17 +30,18 @@ const findOrder = async (req, res) => {
 };
 
 const createOrder = async (req, res) => {
-  const order = {
-    items: req.body.items,
-    customer_id: req.body.customer_id,
-    total_price: req.body.total_price
-  };
+  const { items, customer_id, total_price } = req.body;
+  const order = new Order({
+    items,
+    customer_id,
+    total_price
+  });
 
   try {
-    const response = await mongodb.getDatabase().db().collection('orders').insertOne(order);
-    if (response.acknowledged) {
+    const savedOrder = await order.save();
+    if (savedOrder) {
       res.setHeader('Content-Type', 'application/json');
-      res.status(201).json({ message: 'Order successfully added.', orderId: response.insertedId });
+      res.status(201).json({ message: 'Order successfully added.', orderId: savedOrder._id });
     } else {
       res.status(500).json({ error: 'Order could not be added.' });
     }
@@ -53,7 +54,7 @@ const updateOrder = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid order id to update an order.' });
   }
-  const orderId = new ObjectId(req.params.id);
+  const orderId = req.params.id;
 
   let updates = {};
   if (req.body.items) updates.items = req.body.items;
@@ -65,12 +66,8 @@ const updateOrder = async (req, res) => {
   }
 
   try {
-    const response = await mongodb
-      .getDatabase()
-      .db()
-      .collection('orders')
-      .updateOne({ _id: orderId }, { $set: updates });
-    if (response.modifiedCount > 0) {
+    const updatedOrder = await Order.findByIdAndUpdate(orderId, updates, { new: true });
+    if (updatedOrder) {
       res.status(204).send();
     } else {
       res.status(404).json({ error: 'Order not found or nothing was updated.' });
@@ -84,16 +81,12 @@ const deleteOrder = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid order id to delete an order.' });
   }
-  const orderId = new ObjectId(req.params.id);
+  const orderId = req.params.id;
   try {
-    const response = await mongodb
-      .getDatabase()
-      .db()
-      .collection('orders')
-      .deleteOne({ _id: orderId });
-    if (response.deletedCount > 0) {
+    const deletedOrder = await Order.findByIdAndDelete(orderId);
+    if (deletedOrder) {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json({ message: 'Order deleted', orderId: orderId });
+      res.status(200).json({ message: 'Order deleted', orderId});
     } else {
       res.status(404).json({ error: 'Order not found or could not be deleted.' });
     }

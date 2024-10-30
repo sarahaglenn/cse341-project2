@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const usersController = require('../controllers/users.js');
 const validation = require('../middleware/validate.js');
-const auth = require("../controllers/auth.js");
+const auth = require('../controllers/auth.js');
 
 router.get('/', auth.authCheck, usersController.getUsers);
 

@@ -12,9 +12,9 @@ const userSchema = new Schema({
     default: null
   },
   lastName: {
-  type: String,
+    type: String,
     default: null
-},
+  },
   email: {
     type: String,
     default: null
@@ -29,6 +29,6 @@ const userSchema = new Schema({
   }
 });
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

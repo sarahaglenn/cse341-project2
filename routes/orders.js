@@ -2,15 +2,16 @@ const router = require('express').Router();
 
 const ordersController = require('../controllers/orders.js');
 const validation = require('../middleware/validate.js');
+const auth = require('../controllers/auth.js');
 
-router.get('/', ordersController.getOrders);
+router.get('/', auth.authCheck, ordersController.getOrders);
 
-router.get('/:id', ordersController.findOrder);
+router.get('/:id', auth.authCheck, ordersController.findOrder);
 
-router.post('/', validation.saveOrder, ordersController.createOrder);
+router.post('/', auth.authCheck, validation.saveOrder, ordersController.createOrder);
 
-router.put('/:id', validation.updateOrder, ordersController.updateOrder);
+router.put('/:id', auth.authCheck, validation.updateOrder, ordersController.updateOrder);
 
-router.delete('/:id', ordersController.deleteOrder);
+router.delete('/:id', auth.authCheck, ordersController.deleteOrder);
 
 module.exports = router;

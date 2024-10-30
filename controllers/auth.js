@@ -25,16 +25,15 @@ const handleGoogleLogin = async (profile) => {
 
     return user; // Return the user object as needed
   } catch (error) {
-    console.error("Error handling Google login:", error);
+    console.error('Error handling Google login:', error);
     throw error; // Handle the error appropriately
   }
 };
 
-
 const authCheck = (req, res, next) => {
   if (!req.user) {
     // if user is not logged in
-      return res.status(401).json({ error: 'Unauthorized access. Please log in.' });
+    return res.status(401).json({ error: 'Unauthorized access. Please log in.' });
   } else {
     // if the user is logged in
     next();
@@ -42,6 +41,6 @@ const authCheck = (req, res, next) => {
 };
 
 module.exports = {
-    handleGoogleLogin,
-    authCheck
+  handleGoogleLogin,
+  authCheck
 };

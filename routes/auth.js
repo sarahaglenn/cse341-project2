@@ -7,12 +7,12 @@ const passport = require('passport');
 // auth logout
 router.get('/logout', (req, res, next) => {
   // handle with passport
-    req.logout((err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/');
-    });
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
 });
 
 // auth with google
@@ -25,8 +25,8 @@ router.get(
 
 // callback route for google to redirect to
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    // res.send(req.user);
-    res.redirect('/users');
+  // res.send(req.user);
+  res.redirect('/users');
 });
 
 module.exports = router;

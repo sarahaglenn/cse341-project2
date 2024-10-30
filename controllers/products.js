@@ -1,9 +1,9 @@
-const mongodb = require('../database/connect');
+const Product = require('../models/product-model')
 const { ObjectId } = require('mongodb');
 
 const getProducts = async (req, res) => {
   try {
-    const result = await mongodb.getDatabase().db().collection('products').find().toArray();
+    const result = await Product.find();
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
   } catch (error) {
@@ -15,16 +15,12 @@ const findProduct = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid product id to find a product.' });
   }
-  const productId = new ObjectId(req.params.id);
+  const productId = req.params.id;
   try {
-    const result = await mongodb
-      .getDatabase()
-      .db()
-      .collection('products')
-      .findOne({ _id: productId });
-    if (result) {
+    const product = await Product.findById(productId);
+    if (product) {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(result);
+      res.status(200).json(product);
     } else {
       res.status(404).json({ error: 'No product exists with that id' });
     }
@@ -34,27 +30,28 @@ const findProduct = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  const product = {
-    category: req.body.category,
-    name: req.body.name,
-    description: req.body.description,
-    brand: req.body.brand,
-    sizes: req.body.sizes,
-    price: req.body.price,
-    discount: req.body.discount,
-    colors: req.body.colors
-  };
+  const { category, name, description, brand, sizes, price, discount, colors } = req.body;
+  const product = new Product({
+    category,
+    name,
+    description,
+    brand,
+    sizes,
+    price,
+    discount,
+    colors
+  });
   try {
-    const response = await mongodb.getDatabase().db().collection('products').insertOne(product);
-    if (response.acknowledged) {
+    const savedProduct = await product.save();
+    if (savedProduct) {
       res.setHeader('Content-Type', 'application/json');
       res
         .status(201)
-        .json({ message: 'Product successfully added.', productId: response.insertedId });
+        .json({ message: 'Product successfully added.', productId: savedProduct._id });
     } else {
       res.status(500).json({ error: 'Product could not be added.' });
     }
-  } catch (error) {
+    } catch (error) {
     res.status(500).json({ error: 'Error adding product.', details: error.message });
   }
 };
@@ -63,7 +60,7 @@ const updateProduct = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid product id to update a product.' });
   }
-  const productId = new ObjectId(req.params.id);
+  const productId = req.params.id;
 
   let updates = {};
   if (req.body.category) updates.category = req.body.category;
@@ -79,12 +76,8 @@ const updateProduct = async (req, res) => {
   }
 
   try {
-    const response = await mongodb
-      .getDatabase()
-      .db()
-      .collection('products')
-      .updateOne({ _id: productId }, { $set: updates });
-    if (response.modifiedCount > 0) {
+    const updatedProduct = await Product.findByIdAndUpdate(productId, updates, { new: true });
+    if (updatedProduct) {
       res.status(204).send();
     } else {
       res.status(404).json({ error: 'Product not found or nothing was updated.' });
@@ -98,16 +91,12 @@ const deleteProduct = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid product id to delete a product.' });
   }
-  const productId = new ObjectId(req.params.id);
+  const productId = req.params.id;
   try {
-    const response = await mongodb
-      .getDatabase()
-      .db()
-      .collection('products')
-      .deleteOne({ _id: productId });
-    if (response.deletedCount > 0) {
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+    if (deletedProduct) {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json({ message: 'Product deleted', productId: productId });
+      res.status(200).json({ message: 'Product deleted', productId });
     } else {
       res.status(404).json({ error: 'Product not found or could not be deleted.' });
     }

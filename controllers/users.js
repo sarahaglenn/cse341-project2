@@ -1,4 +1,3 @@
-// const mongodb = require('../database/connect');
 const User = require('../models/user-model');
 const { ObjectId } = require('mongodb');
 
@@ -40,10 +39,15 @@ const createUser = async (req, res) => {
     phone,
     ...(googleId && { googleId }) // only include googleId if it is provided
   });
+
   try {
     const savedUser = await user.save();
+    if (savedUser) {
       res.setHeader('Content-Type', 'application/json');
       res.status(201).json({ message: 'User successfully added.', userId: savedUser._id });
+    } else {
+      res.status(500).json({ error: 'User could not be added.' });
+    }
   } catch (error) {
     res.status(500).json({ error: 'Error adding user.', details: error.message });
   }
