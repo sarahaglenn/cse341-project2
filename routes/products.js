@@ -4,9 +4,9 @@ const productsController = require('../controllers/products');
 const validation = require('../middleware/validate.js');
 const auth = require('../controllers/auth.js');
 
-router.get('/', auth.authCheck, productsController.getProducts);
+router.get('/', productsController.getProducts);
 
-router.get('/:id', auth.authCheck, productsController.findProduct);
+router.get('/:id', productsController.findProduct);
 
 router.post('/', auth.authCheck, validation.saveProduct, productsController.createProduct);
 

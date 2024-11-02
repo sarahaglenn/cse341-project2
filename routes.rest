@@ -15,14 +15,14 @@ content-type: application/json
     "phone":"(123) 456-7890"
 }
 ### PUT user
-PUT http://localhost:8080/users/6716be7fe544d0a2246503a7 HTTP/1.1
+PUT http://localhost:8080/users/670523cfa62cf41888b00029 HTTP/1.1
 content-type: application/json
 
 {
     "phone":"(402) 555-5555"
 }
 ### DELETE user
-DELETE http://localhost:8080/users/670f7dc6af0c05d93dacf662
+DELETE http://localhost:8080/users/6726029a40e13a697f9c33ce
 ### GET all products
 http://localhost:8080/products
 ### GET product by id

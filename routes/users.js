@@ -4,9 +4,9 @@ const usersController = require('../controllers/users.js');
 const validation = require('../middleware/validate.js');
 const auth = require('../controllers/auth.js');
 
-router.get('/', auth.authCheck, usersController.getUsers);
+router.get('/', usersController.getUsers);
 
-router.get('/:id', auth.authCheck, usersController.findUser);
+router.get('/:id', usersController.findUser);
 
 router.post('/', auth.authCheck, validation.saveUser, usersController.createUser);
 
