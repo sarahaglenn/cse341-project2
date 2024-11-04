@@ -9,10 +9,16 @@
   "basePath": "/",
   "schemes": ["https"],
   "securityDefinitions": {
-    "bearerAuth": {
-      "type": "http",
-      "scheme": "bearer",
-      "bearerFormat": "Access token"
+    "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "implicit": {
+          "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+          "scopes": {
+            "profile": "Read basic profile information"
+          }
+        }
+      }
     }
   },
   "paths": {
@@ -45,10 +51,10 @@
       "post": {
         "description": "Create a new user with first and last name, email, address, and phone number.",
         "security": [
-            {
-                "bearerAuth": []
-            }
-          ],
+          {
+            "oauth2": ["profile"]
+          }
+        ],
         "produces": ["application/json"],
         "parameters": [
           {
