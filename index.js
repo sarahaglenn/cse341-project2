@@ -8,6 +8,15 @@ const session = require('express-session');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
+swaggerUi.initOAuth({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  authorizationUrl: process.env.GOOGLE_AUTH_URL,
+  tokenUrl: process.env.GOOGLE_TOKEN_URL,
+  scopes: ['https://www.googleapis.com/auth/userinfo.profile'],
+  usePkceWithAuthorizationCodeGrant: true
+});
+
 const app = express();
 
 const port = process.env.PORT || 8080;
