@@ -8,6 +8,13 @@
   "host": "cse341-project2-5caz.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "Access token"
+    }
+  },
   "paths": {
     "/": {
       "get": {
@@ -37,6 +44,11 @@
       },
       "post": {
         "description": "Create a new user with first and last name, email, address, and phone number.",
+        "security": [
+            {
+                "bearerAuth": []
+            }
+          ],
         "produces": ["application/json"],
         "parameters": [
           {
@@ -59,6 +71,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized access. Please log in."
           },
           "412": {
             "description": "Precondition Failed",
@@ -101,6 +116,11 @@
       },
       "put": {
         "description": "Update an existing user by their id. Can include all or only some fields. Ex id: 670523cfa62cf41888b00029",
+        "security": [
+            {
+                "bearerAuth": []
+            }
+          ],
         "parameters": [
           {
             "name": "id",
@@ -123,6 +143,9 @@
           "400": {
             "description": "Bad Request - Must use a valid user id to find a user. or No fields to update"
           },
+          "401": {
+            "description": "Unauthorized access. Please log in."
+          },
           "412": {
             "description": "Precondition Failed",
             "schema": {
@@ -139,6 +162,11 @@
       },
       "delete": {
         "description": "Delete a user by their id.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "produces": ["application/json"],
         "parameters": [
           {
@@ -154,6 +182,9 @@
           },
           "400": {
             "description": "Bad Request - Must use a valid user id to delete a user."
+          },
+          "401": {
+            "description": "Unauthorized access. Please log in."
           },
           "404": {
             "description": "Not Found - User not found or could not be deleted."
