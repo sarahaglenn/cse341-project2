@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-    category: {
-        type: String,
-        default: null
-    },
+  category: {
+    type: String,
+    default: null
+  },
   name: {
     type: String,
     required: true
@@ -29,11 +29,11 @@ const productSchema = new Schema({
   discount: {
     type: Number,
     default: null
-    },
-    colors: {
-        type: [String],
-        default: null
-    }
+  },
+  colors: {
+    type: [String],
+    default: null
+  }
 });
 
 const Product = mongoose.model('Product', productSchema);
