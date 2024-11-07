@@ -86,7 +86,7 @@ const deleteOrder = async (req, res) => {
     const deletedOrder = await Order.findByIdAndDelete(orderId);
     if (deletedOrder) {
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json({ message: 'Order deleted', orderId});
+      res.status(200).json({ message: 'Order deleted', orderId });
     } else {
       res.status(404).json({ error: 'Order not found or could not be deleted.' });
     }

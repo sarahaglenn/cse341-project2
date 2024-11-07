@@ -8,12 +8,13 @@
   "host": "cse341-project2-5caz.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
-  "securityDefinitions": {
-    "oauth2": {
+  "securitySchemes": {
+    "OAuth2": {
       "type": "oauth2",
       "flows": {
-        "implicit": {
-          "authorizationUrl": "/auth/google",
+        "authorizationCode": {
+          "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+          "tokenUrl": "https://oauth2.googleapis.com/token",
           "scopes": {
             "profile": "Read basic profile information"
           }
@@ -123,10 +124,10 @@
       "put": {
         "description": "Update an existing user by their id. Can include all or only some fields. Ex id: 670523cfa62cf41888b00029",
         "security": [
-            {
-                "bearerAuth": []
-            }
-          ],
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",

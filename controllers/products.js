@@ -1,4 +1,4 @@
-const Product = require('../models/product-model')
+const Product = require('../models/product-model');
 const { ObjectId } = require('mongodb');
 
 const getProducts = async (req, res) => {
@@ -45,13 +45,11 @@ const createProduct = async (req, res) => {
     const savedProduct = await product.save();
     if (savedProduct) {
       res.setHeader('Content-Type', 'application/json');
-      res
-        .status(201)
-        .json({ message: 'Product successfully added.', productId: savedProduct._id });
+      res.status(201).json({ message: 'Product successfully added.', productId: savedProduct._id });
     } else {
       res.status(500).json({ error: 'Product could not be added.' });
     }
-    } catch (error) {
+  } catch (error) {
     res.status(500).json({ error: 'Error adding product.', details: error.message });
   }
 };
