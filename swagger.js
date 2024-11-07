@@ -6,7 +6,8 @@ const doc = {
     description:
       'This API retrieves and updates information related to products, customers, and orders for the All Things Running store'
   },
-  host: 'localhost:8080'
+  // host: 'localhost:8080'
+  host: 'https://cse341-project2-5caz.onrender.com/'
 };
 
 const outputFile = './swagger.json';

@@ -1,5 +1,5 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/user-model');
 const { handleGoogleLogin } = require('../controllers/auth');
 
@@ -10,7 +10,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   User.findById(id).then((user) => {
     done(null, user);
-  });
+  }).catch((error) => done(error, null));
 });
 
 const callbackURL =
@@ -24,9 +24,11 @@ passport.use(
       //options for the google strategy
       callbackURL,
       clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
     async (accessToken, refreshToken, profile, done) => {
+      console.log("access token", accessToken);
+      console.log("refresh token", refreshToken);
       try {
         const user = await handleGoogleLogin(profile);
         console.log('User authenticated:', user);
