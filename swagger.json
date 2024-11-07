@@ -13,8 +13,8 @@
       "type": "oauth2",
       "flows": {
         "authorizationCode": {
-          "authorizationUrl": "/auth/google",
-          "tokenUrl": "/auth/token",
+          "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+          "tokenUrl": "https://oauth2.googleapis.com/token",
           "scopes": {
             "profile": "Read basic profile information"
           }
