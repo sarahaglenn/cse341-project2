@@ -18,7 +18,7 @@
       "oauth2": {
         "type": "oauth2",
         "flows": {
-          "implicit": {
+          "authorizationCode": {
             "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
             "tokenUrl": "https://oauth2.googleapis.com/token",
             "scopes": {
@@ -235,15 +235,16 @@
             "in": "path",
             "required": true,
             "schema": { "type": "string" }
-          },
-          {
-            "name": "user updates",
-            "in": "body",
-            "schema": {
-              "$ref": "#/components/schemas/User"
-            }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/User" }
+            }
+          }
+        },
         "responses": {
           "204": {
             "description": "No Content - The resource was successfully updated, but no response body is returned."

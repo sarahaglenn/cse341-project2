@@ -4,14 +4,22 @@ const User = require('../models/user-model');
 const { handleGoogleLogin } = require('../controllers/auth');
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, { id: user.id, accessToken: user.accessToken });
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
+passport.deserializeUser(async (obj, done) => {
+  try {
+    const user = await User.findById(obj.id);
     done(null, user);
-  }).catch((error) => done(error, null));
+  } catch (error) {
+    done(error);
+  }
 });
+  // (id, done) => {
+//   User.findById(id).then((user) => {
+//     done(null, user);
+//   }).catch((error) => done(error, null));
+// });
 
 const callbackURL =
   process.env.NODE_ENV === 'production'
@@ -30,12 +38,13 @@ passport.use(
       console.log("access token", accessToken);
       console.log("refresh token", refreshToken);
       try {
-        const user = await handleGoogleLogin(profile);
+        let user = await handleGoogleLogin(profile);
         console.log('User authenticated:', user);
+        user.accessToken = accessToken;
         done(null, user);
       } catch (error) {
         console.error('Error during Google authentication:', error);
-        done(error, null);
+        done(error, false);
       }
     }
   )

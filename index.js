@@ -81,10 +81,6 @@ app
       scopes: ["profile"],
       usePkceWithAuthorizationCodeGrant: true
   }}))
-  // .use((req, res, next) => {
-  //   res.setHeader('Access-Control-Allow-Origin', '*');
-  //   next();
-  // })
   .use(bodyParser.json())
   .use('/', require('./routes'));
 
