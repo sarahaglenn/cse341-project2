@@ -30,7 +30,6 @@ router.get(
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     const accessToken = req.user.accessToken;
-    console.log('access Token that comes from user', accessToken);
     res.cookie('authToken', accessToken, {
       maxAge: 3600000
     });

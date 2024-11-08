@@ -54,7 +54,6 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  console.log('Request body:', req.body);
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: 'Must use a valid user id to find a user.' });
   }

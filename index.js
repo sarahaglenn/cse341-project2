@@ -12,21 +12,21 @@ const port = process.env.PORT || 8080;
 const cors = require('cors');
 const allowedOrigins = [
   'http://localhost:8080', // Local development
-  'https://cse341-project2-5caz.onrender.com' // Replace with your actual production site URL
+  'https://cse341-project2-5caz.onrender.com' 
 ];
 
 // CORS configuration
 const corsOptions = {
   origin: (origin, callback) => {
-    // Check if the origin is in the allowedOrigins array
+
     if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true); // Allow the origin
+      callback(null, true); 
     } else {
-      callback(new Error('Not allowed by CORS')); // Reject the origin
+      callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow 'Authorization' header
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
   credentials: true
 };
 
@@ -36,15 +36,6 @@ app.options('*', cors(corsOptions));
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-
-// swaggerUi.initOAuth({
-//   clientId: process.env.CLIENT_ID,
-//   clientSecret: process.env.CLIENT_SECRET,
-//   authorizationUrl: process.env.GOOGLE_AUTH_URL,
-//   tokenUrl: process.env.GOOGLE_TOKEN_URL,
-//   scopes: ['https://www.googleapis.com/auth/userinfo.profile']
-//   // usePkceWithAuthorizationCodeGrant: true
-// });
 
 app
   .use(
@@ -72,7 +63,7 @@ app
           ? 'https://cse341-project2-5caz.onrender.com/api-docs/oauth2-redirect.html'
           : 'http://localhost:8080/api-docs/oauth2-redirect.html',
       requestInterceptor: (req) => {
-        // Get token from session or localStorage
+        // Get token from localStorage
         const token = req.cookies['authToken'];
         if (token) {
           req.headers['Authorization'] = `Bearer ${token}`;

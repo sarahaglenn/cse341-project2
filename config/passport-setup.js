@@ -35,11 +35,11 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log('access token', accessToken);
-      console.log('refresh token', refreshToken);
+      // console.log('access token', accessToken);
+      // console.log('refresh token', refreshToken);
       try {
         let user = await handleGoogleLogin(profile);
-        console.log('User authenticated:', user);
+        // console.log('User authenticated:', user);
         user.accessToken = accessToken;
         done(null, user);
       } catch (error) {
