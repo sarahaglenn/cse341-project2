@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-
 // auth login
 // maybe create a login endpoint?
 
@@ -26,14 +25,17 @@ router.get(
 );
 
 // callback route for google to redirect to
-router.get('/google/redirect', passport.authenticate('google', {failureRedirect: '/',
-}), (req, res) => {
-  const accessToken = req.user.accessToken;
-  console.log("access Token that comes from user", accessToken);
-  res.cookie('authToken', accessToken, {
-    maxAge: 3600000,
-  });
-  res.redirect('/');
-});
+router.get(
+  '/google/redirect',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    const accessToken = req.user.accessToken;
+    console.log('access Token that comes from user', accessToken);
+    res.cookie('authToken', accessToken, {
+      maxAge: 3600000
+    });
+    res.redirect('/');
+  }
+);
 
 module.exports = router;

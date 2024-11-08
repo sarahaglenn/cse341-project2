@@ -11,23 +11,23 @@ const port = process.env.PORT || 8080;
 
 const cors = require('cors');
 const allowedOrigins = [
-    'http://localhost:8080',           // Local development
-    'https://cse341-project2-5caz.onrender.com' // Replace with your actual production site URL
+  'http://localhost:8080', // Local development
+  'https://cse341-project2-5caz.onrender.com' // Replace with your actual production site URL
 ];
 
 // CORS configuration
 const corsOptions = {
-    origin: (origin, callback) => {
-        // Check if the origin is in the allowedOrigins array
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, true); // Allow the origin
-        } else {
-            callback(new Error('Not allowed by CORS')); // Reject the origin
-        }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow 'Authorization' header
-    credentials: true, 
+  origin: (origin, callback) => {
+    // Check if the origin is in the allowedOrigins array
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true); // Allow the origin
+    } else {
+      callback(new Error('Not allowed by CORS')); // Reject the origin
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow 'Authorization' header
+  credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -54,7 +54,7 @@ app
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: process.env.NODE_ENV === 'production'
       }
     })
   )
@@ -62,25 +62,31 @@ app
   .use(passport.session());
 
 app
-  .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
-    oauth2RedirectUrl: process.env.NODE_ENV === 'production'
-      ? 'https://cse341-project2-5caz.onrender.com/api-docs/oauth2-redirect.html'
-      : 'http://localhost:8080/api-docs/oauth2-redirect.html',
+  .use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument, {
+      oauth2RedirectUrl:
+        process.env.NODE_ENV === 'production'
+          ? 'https://cse341-project2-5caz.onrender.com/api-docs/oauth2-redirect.html'
+          : 'http://localhost:8080/api-docs/oauth2-redirect.html',
       requestInterceptor: (req) => {
-      // Get token from session or localStorage
-      const token = req.cookies['authToken'];
-      if (token) {
-        req.headers['Authorization'] = `Bearer ${token}`;
+        // Get token from session or localStorage
+        const token = req.cookies['authToken'];
+        if (token) {
+          req.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return req;
+      },
+      initOAuth: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        appName: 'Running Store API',
+        scopes: ['profile'],
+        usePkceWithAuthorizationCodeGrant: true
       }
-      return req;
-    },
-    initOAuth: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      appName: "Running Store API",
-      scopes: ["profile"],
-      usePkceWithAuthorizationCodeGrant: true
-  }}))
+    })
+  )
   .use(bodyParser.json())
   .use('/', require('./routes'));
 

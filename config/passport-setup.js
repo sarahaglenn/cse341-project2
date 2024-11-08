@@ -15,7 +15,7 @@ passport.deserializeUser(async (obj, done) => {
     done(error);
   }
 });
-  // (id, done) => {
+// (id, done) => {
 //   User.findById(id).then((user) => {
 //     done(null, user);
 //   }).catch((error) => done(error, null));
@@ -32,11 +32,11 @@ passport.use(
       //options for the google strategy
       callbackURL,
       clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log("access token", accessToken);
-      console.log("refresh token", refreshToken);
+      console.log('access token', accessToken);
+      console.log('refresh token', refreshToken);
       try {
         let user = await handleGoogleLogin(profile);
         console.log('User authenticated:', user);

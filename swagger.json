@@ -134,11 +134,6 @@
     "/users/": {
       "get": {
         "description": "Retrieve all users",
-        "security": [
-          {
-            "oauth2": ["profile"]
-          }
-        ],
         "content": ["application/json"],
         "responses": {
           "200": {
@@ -198,7 +193,7 @@
     },
     "/users/{id}": {
       "get": {
-        "description": "Retrieve one user by their id. Ex: 670523cfa62cf41888b00029",
+        "description": "Retrieve one user by their id. Ex id: 670523cfa62cf41888b00029",
         "parameters": [
           {
             "name": "id",
@@ -209,7 +204,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
           },
           "400": {
             "description": "Bad Request - Must use a valid user id to find a user."
@@ -255,14 +255,14 @@
           "401": {
             "description": "Unauthorized access. Please log in."
           },
+          "404": {
+            "description": "Not Found - User not found or nothing was updated."
+          },
           "412": {
             "description": "Precondition Failed",
             "schema": {
               "$ref": "#/components/schemas/ValidationFailed"
             }
-          },
-          "404": {
-            "description": "Not Found - User not found or nothing was updated."
           },
           "500": {
             "description": "Internal Server Error"
@@ -318,130 +318,161 @@
         }
       },
       "post": {
-        "description": "Create a product.",
-        "content": ["application/json"],
-        "parameters": [
+        "description": "Create a new product with a category, name, description, brand, sizes, price, and colors.",
+        "security": [
           {
-            "name": "product",
-            "in": "body",
-            "schema": {
-              "$ref": "#/components/schemas/Product"
-            }
+            "oauth2": ["profile"]
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Product" }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "Created",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "productId": {
-                  "type": "string",
-                  "description": "The unique identifier for the newly created product."
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "productId": {
+                      "type": "string",
+                      "description": "The unique identifier for the newly created product."
+                    }
+                  }
                 }
               }
             }
           },
+          "401": { "description": "Unauthorized access. Please log in." },
           "412": {
             "description": "Precondition Failed",
-            "schema": {
-              "$ref": "#/components/schemas/ValidationFailed"
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ValidationFailed" }
+              }
             }
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/products/{id}": {
-      "get": {
-        "description": "Retrieve one product by its id. Ex id: 670523b0a62cf41888afcc2b",
-        "content": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request - Must use a valid product id to find a product."
-          },
-          "404": {
-            "description": "Not Found - No product exists with that id."
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
-      "put": {
-        "description": "Update a product by its id. Can include all or some fields.  Ex id: 670523b0a62cf41888afcc2b",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "product updates",
-            "in": "body",
-            "schema": {
-              "$ref": "#/components/schemas/Product"
+      "/products/{id}": {
+        "get": {
+          "description": "Retrieve one product by its id. Ex id: 670523b0a62cf41888afcc2b",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Product" }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request - Must use a valid product id to find a product."
+            },
+            "404": {
+              "description": "Not Found - No product exists with that id."
+            },
+            "500": {
+              "description": "Internal Server Error"
             }
           }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content - The resource was successfully updated, but no response body is returned."
-          },
-          "412": {
-            "description": "Precondition Failed",
-            "schema": {
-              "$ref": "#/components/schemas/ValidationFailed"
+        },
+        "put": {
+          "description": "Update a product by its id. Can include all or some fields.  Ex id: 670523b0a62cf41888afcc2b",
+          "security": [
+            {
+              "oauth2": ["profile"]
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Product" }
+              }
             }
           },
-          "400": {
-            "description": "Bad Request - Must use a valid product id to update a product or No fields to update."
-          },
-          "404": {
-            "description": "Not Found - Product not found or nothing was updated."
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "responses": {
+            "204": {
+              "description": "No Content - The resource was successfully updated, but no response body is returned."
+            },
+            "400": {
+              "description": "Bad Request - Must use a valid product id to update a product or No fields to update."
+            },
+            "401": {
+              "description": "Unauthorized access. Please log in."
+            },
+            "404": {
+              "description": "Not Found - Product not found or nothing was updated."
+            },
+            "412": {
+              "description": "Precondition Failed",
+              "schema": {
+                "$ref": "#/components/schemas/ValidationFailed"
+              }
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
           }
-        }
-      },
-      "delete": {
-        "description": "Delete a product by its id.",
-        "content": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request - Must use a valid product id to delete a product."
-          },
-          "404": {
-            "description": "Not Found - product not found or could not be deleted."
-          },
-          "500": {
-            "description": "Internal Server Error"
+        },
+        "delete": {
+          "description": "Delete a product by its id.",
+          "security": [
+            {
+              "oauth2": ["profile"]
+            }
+          ],
+          "content": ["application/json"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "401": {
+              "description": "Unauthorized access. Please log in."
+            },
+            "400": {
+              "description": "Bad Request - Must use a valid product id to delete a product."
+            },
+            "404": {
+              "description": "Not Found - product not found or could not be deleted."
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
           }
         }
       }
@@ -449,11 +480,17 @@
     "/orders/": {
       "get": {
         "description": "Retrieve all orders",
+        "security": [
+          {
+            "oauth2": ["profile"]
+          }
+        ],
         "content": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
           },
+          "401": { "description": "Unauthorized access. Please log in." },
           "500": {
             "description": "Internal Server Error"
           }
@@ -461,33 +498,43 @@
       },
       "post": {
         "description": "Create a new order using the customer id and product id's.",
-        "content": ["application/json"],
-        "parameters": [
+        "security": [
           {
-            "name": "order",
-            "in": "body",
-            "schema": {
-              "$ref": "#/components/schemas/Order"
-            }
+            "oauth2": ["profile"]
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Order" }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "Created",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "orderId": {
-                  "type": "string",
-                  "description": "The unique identifier for the newly created order."
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "orderId": {
+                      "type": "string",
+                      "description": "The unique identifier for the newly created order."
+                    }
+                  }
                 }
               }
             }
           },
+          "401": { "description": "Unauthorized access. Please log in." },
           "412": {
             "description": "Precondition Failed",
-            "schema": {
-              "$ref": "#/components/schemas/ValidationFailed"
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ValidationFailed" }
+              }
             }
           },
           "500": {
@@ -499,6 +546,11 @@
     "/orders/{id}": {
       "get": {
         "description": "Retrieve an order by its id. Ex id: 670f61e83c6c310e426042ae",
+        "security": [
+          {
+            "oauth2": ["profile"]
+          }
+        ],
         "content": ["application/json"],
         "parameters": [
           {
@@ -510,10 +562,18 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Order" }
+              }
+            }
           },
           "400": {
             "description": "Bad Request - Must use a valid order id to find an order."
+          },
+          "401": {
+            "description": "Unauthorized access. Please log in."
           },
           "404": {
             "description": "Not Found - No order exists with that id."
@@ -525,27 +585,36 @@
       },
       "put": {
         "description": "Update an existing order by id. Ex id: 670f61e83c6c310e426042ae",
+        "security": [
+          {
+            "oauth2": ["profile"]
+          }
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "order updates",
-            "in": "body",
-            "schema": {
-              "$ref": "#/components/schemas/Order"
-            }
+            "schema": { "type": "string" }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Order" }
+            }
+          }
+        },
         "responses": {
           "204": {
             "description": "No Content - The resource was successfully updated, but no response body is returned."
           },
           "400": {
             "description": "Bad Request - Must use a valid order id to update an order. Or No fields to update."
+          },
+          "401": {
+            "description": "Unauthorized access. Please log in."
           },
           "412": {
             "description": "Precondition Failed",
@@ -563,6 +632,11 @@
       },
       "delete": {
         "description": "Delete an existing order by its id.",
+        "security": [
+          {
+            "oauth2": ["profile"]
+          }
+        ],
         "content": ["application/json"],
         "parameters": [
           {
@@ -579,8 +653,11 @@
           "400": {
             "description": "Bad Request - Must use a valid order id to delete an order."
           },
+          "401": {
+            "description": "Unauthorized access. Please log in."
+          },
           "404": {
-            "description": "Order not found or could not be deleted."
+            "description": "Not Found - Order not found or could not be deleted."
           },
           "500": {
             "description": "Internal Server Error"
