@@ -53,7 +53,7 @@ app
       resave: false,
       saveUninitialized: false,
       cookie: {
-        httpOnly: true,
+        // httpOnly: true,
         secure: process.env.NODE_ENV === 'production'
       }
     })
